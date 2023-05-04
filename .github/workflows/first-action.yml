@@ -1,5 +1,9 @@
 name: First Workflow
-on: workflow_dispatch
+on: 
+  pull_request:
+    types:
+      - opened
+  workflow_dispatch: 
 jobs:
   first-job:
     runs-on: ubuntu-latest
@@ -14,7 +18,8 @@ jobs:
         run: npm ci
       - name: run tests
         run: npm test
-      
+      - name: Output github context
+        run: echo "${{ toJSON( github.event ) }}"
       
       
     
